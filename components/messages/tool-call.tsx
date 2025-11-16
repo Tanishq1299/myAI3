@@ -7,6 +7,7 @@ export interface ToolDisplay {
     call_icon: React.ReactNode;
     result_label: string;
     result_icon: React.ReactNode;
+    show_arg?: boolean;
 };
 
 const TOOL_DISPLAY_MAP: Record<string, ToolDisplay> = {
@@ -14,7 +15,7 @@ const TOOL_DISPLAY_MAP: Record<string, ToolDisplay> = {
     readSlideLecture: { call_label: "Reading slide lecture", call_icon: <Presentation className="w-4 h-4" />, result_label: "Read slide lecture", result_icon: <Presentation className="w-4 h-4" /> },
     readSyllabus: { call_label: "Reading syllabus", call_icon: <Book className="w-4 h-4" />, result_label: "Read syllabus", result_icon: <Book className="w-4 h-4" /> },
     readAssignment: { call_label: "Reading assignment", call_icon: <Book className="w-4 h-4" />, result_label: "Read assignment", result_icon: <Book className="w-4 h-4" /> },
-    webSearch: { call_label: "Searching the web", call_icon: <Search className="w-4 h-4" />, result_label: "Searched the web", result_icon: <Search className="w-4 h-4" /> },
+    webSearch: { call_label: "Searching the web", call_icon: <Search className="w-4 h-4" />, result_label: "Searched the web", result_icon: <Search className="w-4 h-4" />, show_arg: true },
 };
 
 const DEFAULT_TOOL_DISPLAY: ToolDisplay = { call_label: "Searching", call_icon: <Globe className="w-4 h-4" />, result_label: "Searched", result_icon: <Globe className="w-4 h-4" /> };
@@ -67,9 +68,11 @@ export function ToolCall({ part }: { part: ToolCallPart }) {
                 {toolDisplay.call_icon}
                 <Shimmer duration={1}>{toolDisplay.call_label}</Shimmer>
             </div>
-            <span className="text-muted-foreground/75 truncate">
-                {formattedArgs}
-            </span>
+            {toolDisplay.show_arg && (
+                <span className="text-muted-foreground/75 truncate">
+                    {formattedArgs}
+                </span>
+            )}
         </div >
     );
 }
