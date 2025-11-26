@@ -11,7 +11,6 @@ export const MODEL = openai('gpt-4.1');
 //     middleware: extractReasoningMiddleware({ tagName: 'think' }), // Use this only when using Deepseek
 // });
 
-
 function getDateAndTime(): string {
     const now = new Date();
     const dateStr = now.toLocaleDateString('en-US', {
@@ -54,3 +53,10 @@ export const MODERATION_DENIAL_MESSAGE_DEFAULT = "Your message violates our guid
 
 export const PINECONE_TOP_K = 40;
 export const PINECONE_INDEX_NAME = "my-ai";
+
+// 🔹 NEW: TMDb API key from environment
+export const TMDB_API_KEY = process.env.TMDB_API_KEY ?? "";
+
+if (!TMDB_API_KEY) {
+    console.warn("Warning: TMDB_API_KEY is not set – TMDb-based movie tools will not work.");
+}
