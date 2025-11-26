@@ -11,10 +11,6 @@ export const MODEL = openai('gpt-4.1');
 //     middleware: extractReasoningMiddleware({ tagName: 'think' }), // Use this only when using Deepseek
 // });
 
-if (!process.env.TMDB_API_KEY) {
-  throw new Error('TMDB_API_KEY is not set in environment variables');
-}
-export const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
 function getDateAndTime(): string {
     const now = new Date();
