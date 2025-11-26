@@ -1,5 +1,4 @@
 import { openai } from "@ai-sdk/openai";
-import { TMDB_API_KEY } from '@/config';
 import { fireworks } from "@ai-sdk/fireworks";
 import { wrapLanguageModel, extractReasoningMiddleware } from "ai";
 
