@@ -323,4 +323,34 @@ export default function Chat() {
                         {(status === "streaming" ||
                           status === "submitted") && (
                           <Button
-                            className="a
+                            className="absolute right-2 top-1.5 rounded-full bg-muted text-foreground hover:bg-muted/80"
+                            size="icon"
+                            type="button"
+                            onClick={() => {
+                              stop();
+                            }}
+                          >
+                            <Square className="h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
+                    </Field>
+                  )}
+                />
+              </FieldGroup>
+            </form>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-4 flex w-full items-center justify-center text-[0.7rem] text-muted-foreground">
+          © {new Date().getFullYear()} {OWNER_NAME}
+          <span className="mx-1">·</span>
+          <Link href="/terms" className="underline">
+            Terms of Use
+          </Link>
+        </div>
+      </main>
+    </div>
+  );
+}
