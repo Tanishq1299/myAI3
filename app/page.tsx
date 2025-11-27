@@ -7,7 +7,6 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
 import { useChat } from "@ai-sdk/react";
 import {
   ArrowUp,
@@ -208,7 +207,7 @@ export default function Chat() {
         </div>
 
         {/* Chat card */}
-        <div className="cine-card flex h-[min(75vh,640px)] flex-col border border-border/60">
+        <div className="cine-card flex max-h-[80vh] min-h-[520px] flex-col border border-border/60">
           {/* Header */}
           <div className="border-b border-border/60 px-4 py-3">
             <ChatHeader>
@@ -239,7 +238,7 @@ export default function Chat() {
 
           {/* Messages */}
           <div className="relative flex-1 overflow-y-auto px-4 py-4">
-            <div className="flex min-h-full flex-col items-center justify-end">
+            <div className="flex min-h-full w-full flex-col items-center justify-end">
               {isClient ? (
                 <>
                   <MessageWall
@@ -293,46 +292,51 @@ export default function Chat() {
                       >
                         Message
                       </FieldLabel>
-                      <div className="relative h-13">
-                        <Input
-                          {...field}
-                          id="chat-form-message"
-                          ref={inputRef}
-                          className="h-13 rounded-full border border-[#3a2114] bg-[#27140d] px-5 pr-14 text-sm text-[#fde6bf] placeholder:text-[#c69a6a] shadow-sm"
-                          placeholder="Describe what you want to watch..."
-                          disabled={status === "streaming"}
-                          aria-invalid={fieldState.invalid}
-                          autoComplete="off"
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" && !e.shiftKey) {
-                              e.preventDefault();
-                              form.handleSubmit(onSubmit)();
-                            }
-                          }}
-                        />
-                        {(status === "ready" || status === "error") && (
-                          <Button
-                            className="absolute right-2 top-1.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
-                            type="submit"
-                            disabled={!field.value.trim()}
-                            size="icon"
-                          >
-                            <ArrowUp className="h-4 w-4" />
-                          </Button>
-                        )}
-                        {(status === "streaming" ||
-                          status === "submitted") && (
-                          <Button
-                            className="absolute right-2 top-1.5 rounded-full bg-muted text-foreground hover:bg-muted/80"
-                            size="icon"
-                            type="button"
-                            onClick={() => {
-                              stop();
+
+                      <div className="relative mt-1">
+                        {/* Outer pill – controls the look, kills the white blob */}
+                        <div className="flex h-13 items-center rounded-full border border-[#3a2114] bg-[#27140d] px-4 shadow-sm">
+                          <input
+                            {...field}
+                            id="chat-form-message"
+                            ref={inputRef}
+                            className="mr-2 flex-1 bg-transparent text-sm text-[#fde6bf] placeholder:text-[#c69a6a] outline-none focus-visible:outline-none focus-visible:ring-0"
+                            placeholder="Describe what you want to watch..."
+                            disabled={status === "streaming"}
+                            aria-invalid={fieldState.invalid}
+                            autoComplete="off"
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" && !e.shiftKey) {
+                                e.preventDefault();
+                                form.handleSubmit(onSubmit)();
+                              }
                             }}
-                          >
-                            <Square className="h-4 w-4" />
-                          </Button>
-                        )}
+                          />
+
+                          {(status === "ready" || status === "error") && (
+                            <Button
+                              className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
+                              type="submit"
+                              disabled={!field.value.trim()}
+                              size="icon"
+                            >
+                              <ArrowUp className="h-4 w-4" />
+                            </Button>
+                          )}
+                          {(status === "streaming" ||
+                            status === "submitted") && (
+                            <Button
+                              className="rounded-full bg-muted text-foreground hover:bg-muted/80"
+                              size="icon"
+                              type="button"
+                              onClick={() => {
+                                stop();
+                              }}
+                            >
+                              <Square className="h-4 w-4" />
+                            </Button>
+                          )}
+                        </div>
                       </div>
                     </Field>
                   )}
