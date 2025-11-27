@@ -43,84 +43,63 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-:root {
-  --radius: 0.625rem;
-  --background: oklch(0.995 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.1 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
+/* You can keep any existing :root/.dark blocks if you had them;
+   the body overrides below will give you the brown+gold theme. */
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
+    /* Brown & gold base theme overrides */
+    --background: #120909;
+    --foreground: #f9f2e6;
+    --card: #1d120b;
+    --card-foreground: #f9f2e6;
+    --primary: #d4a94f;
+    --primary-foreground: #120909;
+    --muted: #2a1a10;
+    --muted-foreground: #d2c2a2;
+    --accent: #3a2414;
+    --accent-foreground: #f7ead0;
+    --border: rgba(244, 210, 130, 0.28);
+    --input: rgba(244, 210, 130, 0.18);
+    --ring: #d4a94f;
+
     @apply bg-background text-foreground;
   }
-  
+
+  /* Subtle pill-style links / quick prompts */
   .single-char-link {
-    @apply bg-card text-card-foreground px-2 py-1 rounded-full hover:underline hover:scale-105 transition-all duration-100 !text-foreground !no-underline border-input border;
+    @apply inline-flex items-center gap-1 rounded-full border border-input bg-card px-3 py-1 text-[0.7rem] sm:text-xs text-foreground no-underline hover:bg-accent/40 transition-colors duration-150;
+  }
+
+  /* Full-page background for the chat */
+  .cine-bg {
+    background:
+      radial-gradient(circle at top left, #2b1a10 0, transparent 55%),
+      radial-gradient(circle at bottom right, #4a2b16 0, transparent 55%),
+      #120909;
+  }
+
+  /* Glassy brown/gold chat card */
+  .cine-card {
+    background: rgba(18, 9, 4, 0.92);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(212, 169, 79, 0.55);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(18px);
+  }
+
+  /* Tiny gradient ring used at the top badge */
+  .cine-badge {
+    border-radius: 999px;
+    padding: 1px;
+    background: linear-gradient(
+      120deg,
+      rgba(212, 169, 79, 0.95),
+      rgba(143, 101, 46, 0.95)
+    );
   }
 }
