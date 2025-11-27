@@ -39,7 +39,7 @@ export const DATE_AND_TIME = getDateAndTime();
 // BRANDING
 //
 export const AI_NAME = "CineMatch AI";
-export const OWNER_NAME = "Tanishq Mengi";
+export const OWNER_NAME = "Tanishq Mengi & Swagatika Dash";
 
 export const WELCOME_MESSAGE = `Hello! I'm ${AI_NAME}, a personalized movie assistant created by ${OWNER_NAME}.`;
 
