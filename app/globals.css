@@ -43,9 +43,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* You can keep any existing :root/.dark blocks if you had them;
-   the body overrides below will give you the brown+gold theme. */
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -70,12 +67,10 @@
     @apply bg-background text-foreground;
   }
 
-  /* Subtle pill-style links / quick prompts */
   .single-char-link {
     @apply inline-flex items-center gap-1 rounded-full border border-input bg-card px-3 py-1 text-[0.7rem] sm:text-xs text-foreground no-underline hover:bg-accent/40 transition-colors duration-150;
   }
 
-  /* Full-page background for the chat */
   .cine-bg {
     background:
       radial-gradient(circle at top left, #2b1a10 0, transparent 55%),
@@ -83,7 +78,6 @@
       #120909;
   }
 
-  /* Glassy brown/gold chat card */
   .cine-card {
     background: rgba(18, 9, 4, 0.92);
     border-radius: 1.5rem;
@@ -92,7 +86,6 @@
     backdrop-filter: blur(18px);
   }
 
-  /* Tiny gradient ring used at the top badge */
   .cine-badge {
     border-radius: 999px;
     padding: 1px;
