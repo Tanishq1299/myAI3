@@ -1,34 +1,67 @@
-import { UIMessage } from "ai";
-import { useEffect, useRef } from "react";
-import { UserMessage } from "./user-message";
-import { AssistantMessage } from "./assistant-message";
+"use client";
 
+import type { UIMessage } from "ai";
+import { cn } from "@/lib/utils";
 
-export function MessageWall({ messages, status, durations, onDurationChange }: { messages: UIMessage[]; status?: string; durations?: Record<string, number>; onDurationChange?: (key: string, duration: number) => void }) {
-    const messagesEndRef = useRef<HTMLDivElement>(null);
+type MessageWallProps = {
+  messages: UIMessage[];
+  status?: string;
+  durations?: Record<string, number>;
+  onDurationChange?: (id: string, duration: number) => void;
+};
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
-
-    return (
-        <div className="relative max-w-3xl w-full">
-            <div className="relative flex flex-col gap-4">
-                {messages.map((message, messageIndex) => {
-                    const isLastMessage = messageIndex === messages.length - 1;
-                    return (
-                        <div key={message.id} className="w-full">
-                            {message.role === "user" ? <UserMessage message={message} /> : <AssistantMessage message={message} status={status} isLastMessage={isLastMessage} durations={durations} onDurationChange={onDurationChange} />}
-                        </div>
-                    );
-                })}
-
-                <div ref={messagesEndRef} />
-            </div>
-        </div>
-    );
+function getMessageText(message: UIMessage): string {
+  // Join all text parts into one string
+  if (!message.parts) return "";
+  return message.parts
+    .map((part) => {
+      if (part.type === "text") return part.text ?? "";
+      return "";
+    })
+    .join(" ")
+    .trim();
 }
+
+export function MessageWall({
+  messages,
+}: MessageWallProps) {
+  if (!messages || messages.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="flex w-full max-w-3xl flex-col gap-3">
+      {messages.map((message) => {
+        const isUser = message.role === "user";
+        const text = getMessageText(message);
+
+        if (!text) return null;
+
+        return (
+          <div
+            key={message.id}
+            className={cn(
+              "flex w-full",
+              isUser ? "justify-end" : "justify-start"
+            )}
+          >
+            <div
+              className={cn(
+                "max-w-[80%] text-sm leading-relaxed",
+                isUser
+                  ? // USER BUBBLE – no more white blob
+                    "rounded-3xl bg-[#2a1810] px-4 py-2 text-[#fde6bf]"
+                  : // ASSISTANT BUBBLE
+                    "rounded-3xl border border-[#3a2114] bg-transparent px-4 py-2 text-foreground"
+              )}
+            >
+              {text}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export default MessageWall;
