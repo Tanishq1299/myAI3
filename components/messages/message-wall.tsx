@@ -11,14 +11,13 @@ type MessageWallProps = {
 };
 
 function getMessageText(message: UIMessage): string {
-  // Join all text parts into one string
   if (!message.parts) return "";
   return message.parts
     .map((part) => {
       if (part.type === "text") return part.text ?? "";
       return "";
     })
-    .join(" ")
+    .join("")
     .trim();
 }
 
@@ -47,9 +46,9 @@ export function MessageWall({
           >
             <div
               className={cn(
-                "max-w-[80%] text-sm leading-relaxed",
+                "max-w-[80%] text-sm leading-relaxed whitespace-pre-wrap", // 👈 preserves line breaks & numbering
                 isUser
-                  ? // USER BUBBLE – no more white blob
+                  ? // USER BUBBLE – dark brown, no white blob
                     "rounded-3xl bg-[#2a1810] px-4 py-2 text-[#fde6bf]"
                   : // ASSISTANT BUBBLE
                     "rounded-3xl border border-[#3a2114] bg-transparent px-4 py-2 text-foreground"
