@@ -194,18 +194,16 @@ export default function Chat() {
           <div className="cine-badge inline-flex self-center rounded-full sm:self-start">
             <div className="flex items-center gap-2 rounded-full bg-background/90 px-3 py-1 text-[0.7rem] font-medium tracking-tight text-muted-foreground">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-              <span>CineMatch AI · Brown & Gold Edition</span>
+              <span>CineMatch AI</span>
             </div>
           </div>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            Smart, minimal{" "}
-            <span className="text-primary">movie recommendations</span> tailored
-            to you.
+            Smart movie recommendations tailored to you.
           </h1>
           <p className="mx-auto max-w-xl text-xs text-muted-foreground sm:text-sm">
-            Ask {AI_NAME} for a comedy, thriller, drama, or anything in between.
-            It will respond in a tone that matches the mood you&apos;re asking
-            for and keep things focused with a few strong picks.
+            Ask CineMatch AI for a comedy, thriller, drama, or anything in
+            between. It will respond in a tone that matches the mood you're
+            asking for.
           </p>
         </div>
 
@@ -217,7 +215,7 @@ export default function Chat() {
               <ChatHeaderBlock className="justify-start gap-2">
                 <Clapperboard className="h-4 w-4 text-primary" />
                 <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
-                  CineMatch Session
+                  CINEMATCH SESSION
                 </p>
               </ChatHeaderBlock>
               <ChatHeaderBlock className="justify-center">
@@ -300,7 +298,7 @@ export default function Chat() {
                           {...field}
                           id="chat-form-message"
                           ref={inputRef}
-                          className="h-13 rounded-full border-border/60 bg-card px-5 pr-14 text-sm shadow-sm placeholder:text-muted-foreground/70"
+                          className="h-13 rounded-full border border-[#3a2114] bg-[#27140d] px-5 pr-14 text-sm text-[#fde6bf] placeholder:text-[#c69a6a] shadow-sm"
                           placeholder="Describe what you want to watch..."
                           disabled={status === "streaming"}
                           aria-invalid={fieldState.invalid}
@@ -325,34 +323,4 @@ export default function Chat() {
                         {(status === "streaming" ||
                           status === "submitted") && (
                           <Button
-                            className="absolute right-2 top-1.5 rounded-full bg-muted text-foreground hover:bg-muted/80"
-                            size="icon"
-                            type="button"
-                            onClick={() => {
-                              stop();
-                            }}
-                          >
-                            <Square className="h-4 w-4" />
-                          </Button>
-                        )}
-                      </div>
-                    </Field>
-                  )}
-                />
-              </FieldGroup>
-            </form>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-4 flex w-full items-center justify-center text-[0.7rem] text-muted-foreground">
-          © {new Date().getFullYear()} {OWNER_NAME}
-          <span className="mx-1">·</span>
-          <Link href="/terms" className="underline">
-            Terms of Use
-          </Link>
-        </div>
-      </main>
-    </div>
-  );
-}
+                            className="a
