@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MyAI3",
-  description: "MyAI3",
+  title: "CineMatch AI",
+  description:
+    "CineMatch AI – a brown-and-gold minimal movie recommendation assistant built by Tanishq Mengi.",
 };
 
 export default function RootLayout({
